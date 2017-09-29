@@ -1,0 +1,110 @@
+    1  ls
+    2  ssh-keygen -t rsa -b 4096 -C "olivier@larichelliere.com"
+    3  ls
+    4  ls -al
+    5  ls al ~
+    6  ls -al ~
+    7  ls -al ~/.shh
+    8  ls -al ~/.ssh
+    9  cat ~/.ssh/id_rsa.pub
+   10  cd
+   11  pwd
+   12  cd Desktop/
+   13  mkdir cewp
+   14  ls
+   15  cd cewp
+   16  ls
+   17  git clone 
+   18  git clone git@github.com:majidfn/CEWP-559-fall-2017.git
+   19  ls
+   20  cd CEWP-559-fall-2017/
+   21  ls
+   22  cd..
+   23  cd
+   24  ls
+   25  cd Desktop/
+   26  ls
+   27  cd cewp/
+   28  cd cewp
+   29  pwd
+   30  ls -al
+   31  cd CEWP-559-fall-2017/
+   32  ls
+   33  docker-compose.exe build
+   34  history
+   35  cd ~
+   36  cd Desktop/
+   37  cd cewp/CEWP-559-fall-2017/
+   38  ls
+   39  docker ps
+   40  docker ps
+   41  docker ps -it d37c7344ad87 bash
+   42  minty docker ps -it d37c7344ad87 bash
+   43  winpty docker exec -it d37c7344ad87 bash
+   44  git branch
+   45  git branch -a
+   46  git remote
+   47  ls
+   48  git remote remove origin
+   49  git remote
+   50  git remote add origin git@github.com:olarichelliere/CEWP-559.git
+   51  git remote
+   52  git remote add majid git@github.com:majidfn/CEWP-559-fall-2017.git
+   53  git remote
+   54  git pull majid master
+   55  git pull majid master
+   56  git fetch majid -a
+   57  git pull majid master
+   58  git pull majid master
+   59  git pull majid master
+   60  git pull majid master
+   61  git branch -a
+   62  git fetch majid -a
+   63  git fetch majid -a
+   64  git branch -a
+   65  git fetch majid -a
+   66  git checkout 20170928
+   67  git status
+   68  git diff
+   69  git diff source/exercises/database/mysqli_procedural.php b/source/exercises/database/mysqli_procedural.php
+   70  git diff a/source/exercises/database/mysqli_procedural.php b/source/exercises/database/mysqli_procedural.php
+   71  git diff source/exercises/database/mysqli_procedural.php
+   72  git status
+   73  git add source/exercises/database/mysqli_procedural.php b/source/exercises/database/mysqli_procedural.php
+   74  git add source/exercises/database/mysqli_procedural.php
+   75  git status
+   76  git commit -m "Solution for exercise 1 MySlt procedural"
+   77  git push origin
+   78  git show origin
+   79  git show
+   80  git
+   81  history
+   82  git pull majid
+   83  git pull majid
+   84  git pull majid
+   85  git pull majid
+   86  git push
+   87  git push origin
+   88  git push origin
+   89  git pull majid
+   90  git push origin
+   91  git pull majid
+   92  git pull majid
+   93  git status
+   94  git status source/exercises/database/mysqli_procedural.php
+   95  git add source/exercises/database/mysqli_procedural.php
+   96  git commit -m "mysql update"
+   97  git pull majid
+   98  git add source/exercises/database/mysqli_procedural.php
+   99  git commit -m "mysql update"
+  100  git push origin
+  101  git status
+  102  git diff
+  103  git add /source/exercises/database/mysqli_oop.php
+  104  ls
+  105  git add ./source/exercises/database/mysqli_oop.php
+  106  git commit -m "update"
+  107  git status
+  108  history
+  109  mkdir history
+  110  history > history/20170928.log
