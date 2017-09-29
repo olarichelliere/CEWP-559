@@ -1,4 +1,5 @@
 <?php
+
 $conn = mysqli_connect('mysql', 'root', 'root', 'CCE_PHPMySQL2');
 
 if (!$conn) {
@@ -11,13 +12,14 @@ if (!$conn) {
 $result = mysqli_query($conn, 'SELECT ID, Name, Price FROM items');
 
 if ($result) {
-    
+
     
     while($row = mysqli_fetch_assoc($result)){
   
     
     echo $row['ID']. ' - ' . $row['Name']."<br>";
         
+
     }
 }
 
