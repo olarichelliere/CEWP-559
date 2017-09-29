@@ -19,7 +19,6 @@ if ($result) {
     
     echo $row['ID']. ' - ' . $row['Name']."<br>";
         
-
     }
 }
 
