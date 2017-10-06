@@ -1,15 +1,12 @@
 <?php
 
-class AboutModel
+class IndexModel
 {
     public $title;
     public $description;
 
     public function __construct(){
-      $this->title = 'About Page';
+        $this->title = 'Index Page';
         $this->description = 'Home Page';
-        
-        
-        
     }
 }
