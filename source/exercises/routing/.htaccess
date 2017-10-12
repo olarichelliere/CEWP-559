@@ -1,4 +1,8 @@
 Options -MultiViews
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
+<<<<<<< HEAD
 RewriteRule ^ index.php [QSA,L]
+=======
+RewriteRule ^ index.php [QSA,L]
+>>>>>>> 3fe3754688e84ba25ff29f78eeaae1be04e65d17

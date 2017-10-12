@@ -3,16 +3,13 @@
 require_once __DIR__.'/loader.php';
 
 
-$paths=explode('/', $_SERVER['REQUEST_URI']);
 
-
-
-//$page = $_GET['page'];
-$page=$paths[3];
-
+$paths = explode('/', $_SERVER['REQUEST_URI']);
+// var_dump($paths);
+$page = $paths[3];
 
 if(empty($page)){
-    $page='index';
+    $page = 'index';
 }
 
 $routes = array(

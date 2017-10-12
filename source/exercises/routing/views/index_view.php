@@ -4,16 +4,17 @@ class IndexView
 {
     private $model;
 
-    public function __construct($model) {
+    public function __construct($model) {git
         $this->model = $model;
     }
 	
     public function output(){
-        
-        $title=$this->model->title;
-        $description=$this->model->description;
-        require_once __DIR__. '/../templates/template.php';
-        
-        //return $this->model->title . ': '. $this->model->description;
+
+
+		$title = $this->model->title;
+		$description = $this->model->description;
+
+    	require_once __DIR__. '/../templates/template.php';
+
     }
 }
