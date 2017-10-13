@@ -6,63 +6,29 @@ class CategoryModel extends BaseModel
     public $id;
     public $name;
     public $description;
-    public $price;
 
     public $_data;
     
     protected $db_connection;
     
-    protected $TableName = 'Categories ';
+    protected $TableName = 'categories';
     protected $ClassName = 'CategoryModel';
     
+
     function __construct($connection = null){
         if(!empty($connection)){
             $this->db_connection = $connection;
         }
     }
 
-
-    public function getAll(){
-        $items = array();
-        $query = 'SELECT id, name, price, description FROM items';
-        $result = $this->db_connection->query($query);
-        
-        if (!$result) {
-            printf("Error: %s\n", $this->db_connection->error);
-
-            return;
-        }
-        
-        while ($item = $result->fetch_object('ItemModel')) {
-            $items[] = $item;
-        }
-
-        $this->_data = $items;
-
-    }
-/*
-    public function getOne($id){
-        $query = 'SELECT id, name, price, description FROM items WHERE ID = ' . $id;
-        $result = $this->db_connection->query($query);
-        
-        if (!$result) {
-            printf("Error: %s\n", $this->db_connection->error);
-            return;
-        }
-        
-        $item = $result->fetch_object('ItemModel');
-        $this->_data = $item;
-    }
-*/
     //
     // Save the payload as a new Item in to the Database
     // 
     public function create($payload){
         // Using sprintf to format the query in a nicer way
-        $query = sprintf("INSERT INTO items (name, description, price) VALUES ('%s', '%s', '%s')", 
+        $query = sprintf("INSERT INTO categories (name, description) VALUES ('%s', '%s', '%s')", 
             $payload->name, 
-            $payload->description, 
-            $payload->price);
+            $payload->description);
 
         $result = $this->db_connection->query($query);
         
@@ -77,10 +43,9 @@ class CategoryModel extends BaseModel
 
     public function update($id, $payload){
         // Using sprintf to format the query in a nicer way
-        $query = sprintf("UPDATE items SET name = '%s' , description = '%s', price = '%s' WHERE id = '%d'", 
+        $query = sprintf("UPDATE categories SET name = '%s' , description = '%s' WHERE id = '%d'", 
             $payload->name, 
-            $payload->description, 
-            $payload->price,
+            $payload->description,
             $id);
 
         $result = $this->db_connection->query($query);
@@ -91,7 +56,5 @@ class CategoryModel extends BaseModel
         }
 
         return $this->getOne($id);
-    }    
-
-
+    }  
 }

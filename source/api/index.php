@@ -38,7 +38,9 @@ if ($mysqli->connect_errno) {
             if($method == 'POST'){
                 $controller->create($requestBody);
             }elseif($method == 'PUT' && !empty($id)){
-                $controller->update($id,$requestBody);
+                $controller->update($id, $requestBody);
+            }elseif($method == 'DELETE' && !empty($id)){
+                $controller->deleteOne($id);
             }elseif($method == 'GET' && !empty($id)){
                 $controller->getOne($id);
             }elseif($method == 'GET'){
@@ -53,6 +55,19 @@ if ($mysqli->connect_errno) {
             $view = new CategoryView($model);
             $controller = new CategoryController($model);
 
+            if($method == 'POST'){
+                $controller->create($requestBody);
+            }elseif($method=='PUT' && !empty($id)){
+                $controller->update($id,$requestBody);
+            }elseif($method == 'DELETE' && !empty($id)){
+                $controller->deleteOne($id);
+            }elseif($method == 'GET' && !empty($id)){
+                $controller->getOne($id);
+            }elseif($method == 'GET'){
+                $controller->getAll();
+            }
+            echo $view->output();
+
             break;
 
 
@@ -64,7 +79,5 @@ if ($mysqli->connect_errno) {
 }catch(Exception $e){
      http_response_code($e->getCode());
      echo  'Caught exception',$e->getMessage();
-     
-  
 }
 

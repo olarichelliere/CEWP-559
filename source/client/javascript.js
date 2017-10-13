@@ -40,7 +40,7 @@ function showItems(event) {
 
     
 
-    httpRequest('GET', 'http://localhost/api/items', undefined, function (data) {
+    httpRequest('GET', 'http://localhost:8888/api/items/', undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
             htmlContainer.innerHTML += 
@@ -66,7 +66,7 @@ function showItem(event, id) {
     
     
     
-    httpRequest('GET', 'http://localhost/api/items/' + id, undefined, function (data) {
+    httpRequest('GET', 'http://localhost:8888/api/items/' + id, undefined, function (data) {
         document.getElementById('single_item_name').innerHTML = data.name;
         document.getElementById('single_item_desc').innerHTML = data.description;
         document.getElementById('single_item_price').innerHTML = '$' + data.price;
@@ -100,7 +100,7 @@ function createItem(event){
         price: price
     }
 
-    httpRequest('POST', 'http://localhost/api/items/', data, function () {
+    httpRequest('POST', 'http://localhost:8888/api/items/', data, function () {
         console.log('Successful creation of new item');
         document.getElementById("items_btn").click();
     });
