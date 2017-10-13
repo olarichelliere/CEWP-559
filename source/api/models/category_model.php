@@ -1,6 +1,6 @@
 <?php
 
-class ItemModel extends BaseModel
+class CategoryModel extends BaseModel
 {
 
     public $id;
@@ -12,8 +12,8 @@ class ItemModel extends BaseModel
     
     protected $db_connection;
     
-    protected $TableName = 'items';
-    protected $ClassName = 'ItemModel';
+    protected $TableName = 'Categories ';
+    protected $ClassName = 'CategoryModel';
     
     function __construct($connection = null){
         if(!empty($connection)){

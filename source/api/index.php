@@ -24,34 +24,47 @@ if ($mysqli->connect_errno) {
 }
 
 
+ try{
+     switch ($resource) {
 
-switch ($resource) {
-
-    case 'items':
-        $model = new ItemModel($mysqli);
-        $view = new ItemView($model);
-        $controller = new ItemController($model);
-
-
-        if($method == 'POST'){
-            $controller->create($requestBody);
-        }elseif($method == 'GET' && !empty($id)){
-            $controller->getOne($id);
-        }elseif($method == 'GET'){
-            $controller->getAll();
-        }
-
-        echo $view->output();
-        break;
+       
         
-    case 'categories':
-        // $model = new CategoryModel($mysqli);
-        // $view = new CategoryView($model);
-        // $controller = new CategoryController($model);
+        case 'items':
+            $model = new ItemModel($mysqli);
+            $view = new ItemView($model);
+            $controller = new ItemController($model);
 
-        break;
 
-    
-    default:
-        break;
+            if($method == 'POST'){
+                $controller->create($requestBody);
+            }elseif($method == 'PUT' && !empty($id)){
+                $controller->update($id,$requestBody);
+            }elseif($method == 'GET' && !empty($id)){
+                $controller->getOne($id);
+            }elseif($method == 'GET'){
+                $controller->getAll();
+            }
+
+            echo $view->output();
+            break;
+
+        case 'categories':
+            $model = new CategoryModel($mysqli);
+            $view = new CategoryView($model);
+            $controller = new CategoryController($model);
+
+            break;
+
+
+        default:
+            break;
+        }
+     
+            
+}catch(Exception $e){
+     http_response_code($e->getCode());
+     echo  'Caught exception',$e->getMessage();
+     
+  
 }
+

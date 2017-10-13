@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/models/base_model.php';
+
 require_once __DIR__.'/models/item_model.php';
 require_once __DIR__.'/views/item_view.php';
 require_once __DIR__.'/controllers/item_controller.php';
