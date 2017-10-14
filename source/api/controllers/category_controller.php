@@ -1,6 +1,6 @@
 <?php
 
-class ItemController
+class CategoryController
 {
     private $model;
 
@@ -9,7 +9,6 @@ class ItemController
     }
 
     public function getAll(){
-
         $this->model->getAll();
     }
 
@@ -23,15 +22,21 @@ class ItemController
 
         if(!array_key_exists('name', $payload)){
             throw new Exception('name should be provided!',400);
-        }elseif(!array_key_exists('price', $payload)){
-            throw new Exception('`price` should be provided!',400);
+        }elseif(!array_key_exists('description', $payload)){
+            throw new Exception('`description` should be provided!',400);
         }
-
         $this->model->create($payload);
     }
     
     public function update($id, $payload){
-        
+
+        if(empty($id)){
+            throw new Exception('id should be provide',400);
+        }elseif(!array_key_exists('name', $payload)){
+            throw new Exception('name should be provided!',400);
+        }elseif(!array_key_exists('description', $payload)){
+            throw new Exception('`description` should be provided!',400);
+        }
         $this->model->update($id, $payload);
         
     }

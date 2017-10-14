@@ -7,8 +7,7 @@ php7:
     - ./build/docker/apache2/apache2.conf:/etc/apache2/conf-enabled/apache2.conf
     - ./build/docker/apache2/hosts.conf:/etc/apache2/sites-enabled/hosts.conf
   ports:
-    - "80:80"
-    - "8080:8080"
+    - "8888:80"
   links:
     - mysql
   container_name: PHP7

@@ -1,20 +1,20 @@
 <?php
 
-class ItemModel extends BaseModel
+class CategoryModel extends BaseModel
 {
 
     public $id;
     public $name;
     public $description;
-    public $price;
 
     public $_data;
     
     protected $db_connection;
     
-    protected $TableName = 'items';
-    protected $ClassName = 'ItemModel';
+    protected $TableName = 'categories';
+    protected $ClassName = 'CategoryModel';
     
+
     function __construct($connection = null){
         if(!empty($connection)){
             $this->db_connection = $connection;
@@ -26,10 +26,9 @@ class ItemModel extends BaseModel
     // 
     public function create($payload){
         // Using sprintf to format the query in a nicer way
-        $query = sprintf("INSERT INTO items (name, description, price) VALUES ('%s', '%s', '%s')", 
+        $query = sprintf("INSERT INTO categories (name, description) VALUES ('%s', '%s', '%s')", 
             $payload->name, 
-            $payload->description, 
-            $payload->price);
+            $payload->description);
 
         $result = $this->db_connection->query($query);
         
@@ -44,10 +43,9 @@ class ItemModel extends BaseModel
 
     public function update($id, $payload){
         // Using sprintf to format the query in a nicer way
-        $query = sprintf("UPDATE items SET name = '%s' , description = '%s', price = '%s' WHERE id = '%d'", 
+        $query = sprintf("UPDATE categories SET name = '%s' , description = '%s' WHERE id = '%d'", 
             $payload->name, 
-            $payload->description, 
-            $payload->price,
+            $payload->description,
             $id);
 
         $result = $this->db_connection->query($query);
@@ -58,7 +56,5 @@ class ItemModel extends BaseModel
         }
 
         return $this->getOne($id);
-    }    
-
-
+    }  
 }

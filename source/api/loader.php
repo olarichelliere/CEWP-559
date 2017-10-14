@@ -1,9 +1,15 @@
 <?php
 
+require_once __DIR__.'/models/base_model.php';
+
 require_once __DIR__.'/models/item_model.php';
 require_once __DIR__.'/views/item_view.php';
 require_once __DIR__.'/controllers/item_controller.php';
 
+
+require_once __DIR__.'/models/category_model.php';
+require_once __DIR__.'/views/category_view.php';
+require_once __DIR__.'/controllers/category_controller.php';
 
 // spl_autoload_register(function ($class_name) {
 //     $paths = preg_split("/(?=[A-Z])/", $class_name);

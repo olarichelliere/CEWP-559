@@ -1,6 +1,6 @@
 <?php
 
-class ItemView
+class CategoryView
 {
     private $model;
 

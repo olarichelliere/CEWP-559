@@ -4,7 +4,7 @@ class IndexView
 {
     private $model;
 
-    public function __construct($model) {
+    public function __construct($model) {git
         $this->model = $model;
     }
 	

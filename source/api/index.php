@@ -2,10 +2,15 @@
 
 require_once __DIR__.'/loader.php';
 
-$routes = array_values(array_filter(explode('/', $_SERVER['REQUEST_URI'])));
-$path =  $routes[1]; 
-$id=$routes[2];
-$method=$_SERVER['REQUEST_METHOD'];
+
+$pathParts = array_values(array_filter(explode('/', $_SERVER['REQUEST_URI'])));
+$resource =  $pathParts[1]; 
+$id = $pathParts[2];
+
+$method = $_SERVER['REQUEST_METHOD'];
+$requestBody = json_decode(file_get_contents('php://input'));
+
+
 
 // 
 // Database Connection
@@ -18,23 +23,61 @@ if ($mysqli->connect_errno) {
     exit;
 }
 
-switch ($path) {
-    case 'items':
-        $model = new ItemModel($mysqli);
-        $view = new ItemView($model);
-        $controller = new ItemController($model);
+
+ try{
+     switch ($resource) {
+
+       
         
-        if $method=="POST"{
-           $controller->create(); 
+        case 'items':
+            $model = new ItemModel($mysqli);
+            $view = new ItemView($model);
+            $controller = new ItemController($model);
+
+
+            if($method == 'POST'){
+                $controller->create($requestBody);
+            }elseif($method == 'PUT' && !empty($id)){
+                $controller->update($id, $requestBody);
+            }elseif($method == 'DELETE' && !empty($id)){
+                $controller->deleteOne($id);
+            }elseif($method == 'GET' && !empty($id)){
+                $controller->getOne($id);
+            }elseif($method == 'GET'){
+                $controller->getAll();
+            }
+
+            echo $view->output();
+            break;
+
+        case 'categories':
+            $model = new CategoryModel($mysqli);
+            $view = new CategoryView($model);
+            $controller = new CategoryController($model);
+
+            if($method == 'POST'){
+                $controller->create($requestBody);
+            }elseif($method=='PUT' && !empty($id)){
+                $controller->update($id,$requestBody);
+            }elseif($method == 'DELETE' && !empty($id)){
+                $controller->deleteOne($id);
+            }elseif($method == 'GET' && !empty($id)){
+                $controller->getOne($id);
+            }elseif($method == 'GET'){
+                $controller->getAll();
+            }
+            echo $view->output();
+
+            break;
+
+
+        default:
+            break;
         }
-        elseif(empty($id)){
-            $controller->getAll();
-        }else{
-            $controller->getID($id);   
-        }
-        echo $view->output();
-        break;
-    
-    default:
-        break;
+     
+            
+}catch(Exception $e){
+     http_response_code($e->getCode());
+     echo  'Caught exception',$e->getMessage();
 }
+

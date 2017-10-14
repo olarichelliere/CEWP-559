@@ -9,18 +9,42 @@ class ItemController
     }
 
     public function getAll(){
-        $this->model->getItems();
+
+        $this->model->getAll();
+    }
+
+    public function getOne($id){
+        $this->model->getOne($id);
+    }
+
+    public function create($payload){
+        // Validating the data inside the JSON
+        // We make sure the `title` and `price` are provided
+
+        if(!array_key_exists('name', $payload)){
+            throw new Exception('name should be provided!',400);
+        }elseif(!array_key_exists('price', $payload)){
+            throw new Exception('`price` should be provided!',400);
+        }
+
+        $this->model->create($payload);
     }
     
-    public function getID($id){
-        $this->model->getItemByID($id);
+    public function update($id, $payload){
+        
+        if(!array_key_exists('name', $payload)){
+            throw new Exception('name should be provided!',400);
+        }elseif(!array_key_exists('price', $payload)){
+            throw new Exception('`price` should be provided!',400);
+        }
+        $this->model->update($id, $payload);
+        
+    }
+
+    public function deleteOne($id){
+        $this->model->deleteOne($id);
     }
     
-    public function create($json_date){
-        //parse
-        // create model
-        //save model
-        $this->model->save();
-    }
+    
     
 }

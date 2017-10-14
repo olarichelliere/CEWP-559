@@ -6,7 +6,9 @@ class IndexModel
     public $description;
 
     public function __construct(){
+
         $this->title = 'Home Page';
         $this->description = 'Welcome';
+
     }
 }
