@@ -17,7 +17,6 @@ $routes = array(
 );
 
 foreach($routes as $key => $components){
-    
     if ($page == $key) {
         $Model = $components['model'];
         $View = $components['view'];

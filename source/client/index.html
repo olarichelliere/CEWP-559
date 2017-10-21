@@ -15,6 +15,7 @@
 				<li><a href="./">Home</a></li>
 				<li><a href="./items" id="items_btn">Items</a></li>
 				<li><a href="./items" id="new_item_btn">New Item</a></li>
+                <li><a href="./items" id="new_categorie_btn">New Categorie</a></li>
 			</ul>	
 		</div>
 		<div id="content">
@@ -31,7 +32,18 @@
 				<div class="separator"></div>
 				<div class="block"><label>Price:</label><input type="text" id="new_item_price"/></div>
 				<div class="separator"></div>
+				<div class="block"><label>Image:</label><input name="new_item_image" type="file" id="new_item_image"></div>
+				<div class="separator"></div>
 				<button class="create" onclick="createItem(event)">Create</button>
+			</div>
+            <div id="new_categorie_container">
+				<div class="block"><label>Title:</label><input type="text" id="new_categorie_title"/></div>
+				<div class="separator"></div>
+				<div class="block"><label>Desc:</label><textarea rows="5" cols="50" id="new_categorie_desc"></textarea></div>
+				<div class="separator"></div>
+				<div class="block"><label>Image:</label><input name="new_categorie_image" type="file" id="new_categorie_image"></div>
+				<div class="separator"></div>
+				<button class="create" onclick="createCategorie(event)">Create</button>
 			</div>
 		</div>
 		<div id="footer">

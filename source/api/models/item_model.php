@@ -2,34 +2,28 @@
 
 class ItemModel extends BaseModel
 {
-
     public $id;
     public $name;
     public $description;
     public $price;
 
+    protected $TableName = 'items';
+    protected $ModelName = 'ItemModel';
+
     public $_data;
     
-    protected $db_connection;
-    
-    protected $TableName = 'items';
-    protected $ClassName = 'ItemModel';
-    
-    function __construct($connection = null){
-        if(!empty($connection)){
-            $this->db_connection = $connection;
-        }
-    }
-
     //
     // Save the payload as a new Item in to the Database
-    // 
-    public function create($payload){
+    //
+    public function create($payload)
+    {
         // Using sprintf to format the query in a nicer way
-        $query = sprintf("INSERT INTO items (name, description, price) VALUES ('%s', '%s', '%s')", 
-            $payload->name, 
-            $payload->description, 
-            $payload->price);
+        $query = sprintf(
+            "INSERT INTO items (name, price, description) VALUES ('%s', '%s', '%s')",
+            $payload->name,
+            $payload->price,
+            $payload->description
+        );
 
         $result = $this->db_connection->query($query);
         
@@ -42,13 +36,16 @@ class ItemModel extends BaseModel
         return $this->getOne($insertedId);
     }
 
-    public function update($id, $payload){
+    public function update($id, $payload)
+    {
         // Using sprintf to format the query in a nicer way
-        $query = sprintf("UPDATE items SET name = '%s' , description = '%s', price = '%s' WHERE id = '%d'", 
-            $payload->name, 
-            $payload->description, 
+        $query = sprintf(
+            "UPDATE items SET name = '%s' , description = '%s', price = '%s' WHERE id = %d",
+            $payload->name,
+            $payload->description,
             $payload->price,
-            $id);
+            $id
+        );
 
         $result = $this->db_connection->query($query);
         
@@ -58,7 +55,13 @@ class ItemModel extends BaseModel
         }
 
         return $this->getOne($id);
-    }    
+    }
 
-
+    /**
+     * Updates the filename info for the specified item
+     */
+    public function updateImage($id, $filename) 
+    {
+        return $this->updateFieldById($id, 'image', $filename);
+    }
 }

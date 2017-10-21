@@ -20,8 +20,7 @@ a{
 /* you can structure your code's white space so that it is as readable for when you come back in the future or for other people to read and edit quickly */
 
 body{
-	background-image: url("img/imgBackground.jpeg");
-    font-family: arial; font-size: 80%; line-height: 1.2em; width: 100%; margin: 0; 
+    font-family: arial; font-size: 80%; line-height: 1.2em; width: 100%; margin: 0; background: #eee;
 }
 /* you can put your code all in one line like above */
 #page{ margin: 20px; }
@@ -72,6 +71,11 @@ body{
 	color: white;
 }
 
+.center {
+    margin: auto;
+	width: 50%;
+}
+
 .item_box {
 	margin: 30px 10px;
 	background: grey;
@@ -80,6 +84,12 @@ body{
 	padding: 10px;
 	float:left;
 }
+
+.item_box img { 
+	width:120px;
+	height: 120px;
+}
+
 #list_items_container .title{
 	font-weight: bold;
 	margin-bottom: 10px;
@@ -144,6 +154,10 @@ body{
 	padding: 10px;
 	margin: 10px;
 	vertical-align: middle;
+}
+
+.block input[type="file"]{
+	font-size: 12px;
 }
 
 .separator{
