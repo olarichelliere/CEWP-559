@@ -29,7 +29,7 @@ function httpRequest(method, url, payload, callback) {
     httpRequest.send(payload);
 }
 
-function fileUpload(url, file, callback) {
+function fileUploadItem(url, file, callback) {
     var reader = new FileReader();  
     var httpRequest = new XMLHttpRequest();
     var formData = new FormData();
@@ -124,7 +124,7 @@ function createItem(event){
     httpRequest('POST', '/items/', data, function (newRecord) {
         console.log('Successful creation of new item', newRecord);
 
-        fileUpload(`/items/${newRecord.id}/image`, file, function(){
+        fileUploadItem(`/items/${newRecord.id}/image`, file, function(){
             console.log('File uploaded successfully!');
             document.getElementById("items_btn").click();
         });
@@ -133,11 +133,113 @@ function createItem(event){
 }
 
 
+function fileUploadCategory(url, file, callback) {
+    var reader = new FileReader();  
+    var httpRequest = new XMLHttpRequest();
+    var formData = new FormData();
+
+    httpRequest.open("POST", baseURL + url);
+
+    httpRequest.onreadystatechange = function(receivedData) {
+        if (httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
+            callback();
+        }
+    };    
+
+    formData.append('new_category_image',file);
+    httpRequest.send(formData);
+  }
+
+function showCategories(event) {
+    event.preventDefault();
+    
+    hideAllSections();
+
+    var htmlContainer = document.getElementById('list_categories_container');
+    htmlContainer.innerHTML = '';
+    htmlContainer.style.display = "inline-block";
+
+    
+
+    httpRequest('GET', '/categories', undefined, function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+            htmlContainer.innerHTML += 
+                `<div class="category_box">
+                    
+                    <div class="center"><img src="${baseURL}/../images/${item['image']}" width=150 height=150 /></div>
+                    <div class="title"><a href="#" onclick="showItem(event, ${item['id']})">${item["name"]}</a></div>
+                    <div class="description">${item["description"]}</div>
+                
+                </div>`;
+        }
+    });
+
+}
+
+function showCategory(event, id) {
+    event.preventDefault();
+    
+    hideAllSections();
+    
+    var htmlContainer = document.getElementById('single_category_container');
+    htmlContainer.style.display = "block";
+    
+    
+    
+    httpRequest('GET', '/categories/' + id, undefined, function (data) {
+        document.getElementById('single_category_name').innerHTML = data.name;
+        document.getElementById('single_category_desc').innerHTML = data.description;
+    });
+}
+
+
+function showNewCategory(event) {
+    event.preventDefault();
+    
+    hideAllSections();
+
+    var htmlContainer = document.getElementById('new_category_container');
+    htmlContainer.style.display = "block";
+
+    document.getElementById("new_category_title").value = '';
+    document.getElementById("new_category_desc").value = '';
+    document.getElementById("new_category_image").value = '';
+}
+
+function createCategory(event){
+    event.preventDefault();
+    
+    var title = document.getElementById("new_category_title").value;
+    var desc = document.getElementById("new_category_desc").value;
+
+    var file = document.getElementById("new_category_image").files[0];
+
+    var data = {
+        name: title,
+        description: desc
+    }
+
+    httpRequest('POST', '/categories/', data, function (newRecord) {
+        console.log('Successful creation of new category', newRecord);
+
+        fileUploadCategory(`/categories/${newRecord.id}/image`, file, function(){
+            console.log('File uploaded successfully!');
+            document.getElementById("new_category_btn").click();
+        });
+
+    });
+}
+
 
 function hideAllSections() {
     document.getElementById("list_items_container").style.display = "none";
     document.getElementById("single_item_container").style.display = "none";
     document.getElementById("new_item_container").style.display = "none";
+    document.getElementById("list_categories_container").style.display = "none";
+    document.getElementById("single_category_container").style.display = "none";
+    document.getElementById("new_category_container").style.display = "none";
+ 
 }
 
 
@@ -145,5 +247,6 @@ function loaded() {
     /// Button Listeners
     document.getElementById("items_btn").addEventListener('click', showItems, false);
     document.getElementById("new_item_btn").addEventListener('click', showNewItem, false);
+    document.getElementById("new_category_btn").addEventListener('click', showNewCategory, false);
     document.getElementById("items_btn").click();
 }
