@@ -85,7 +85,6 @@ try {
 
             } elseif ($method == 'POST') {
                $data= $controller->create($requestJSON);
-               var_dump($data);
             } elseif ($method == 'GET' && !empty($id)) {
                 $data = $controller->getOne($id);
 
