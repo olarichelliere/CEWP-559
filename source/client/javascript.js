@@ -16,6 +16,9 @@ function httpRequest(method, url, payload, callback) {
             return
         }
 
+        console.log("Status Code Received from the Back-End:", httpRequest.status);
+        console.log("Response Received from the Back-End:", httpRequest.responseText);
+
         callback(JSON.parse(httpRequest.responseText));
     };
 

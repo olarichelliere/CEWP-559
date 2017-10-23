@@ -28,7 +28,7 @@ class CategoryController
             throw new Exception('`name` should be provided!');
         } 
 
-        $this->model->create($payload);
+        return $this->model->create($payload);
     }
 
     public function upload($id, $file)
