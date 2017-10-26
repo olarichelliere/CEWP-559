@@ -15,5 +15,6 @@ class IndexView
         require_once __DIR__. '/../templates/template.php';
         
         //return $this->model->title . ': '. $this->model->description;
+
     }
 }

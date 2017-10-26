@@ -13,6 +13,7 @@ $page=$paths[3];
 
 if(empty($page)){
     $page='index';
+
 }
 
 $routes = array(
