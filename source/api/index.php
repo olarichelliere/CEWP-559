@@ -92,7 +92,29 @@ try {
         }
         
         break;
-        
+       
+        case 'users':
+               
+        $model = new UsersModel($mysqli);
+        $controller = new UsersController($model);
+            
+        if ($method == 'POST') {
+            $data = $controller->create($requestJSON);
+        } 
+            
+        break;
+            
+        case 'login':
+            
+        $model = new UsersModel($mysqli);
+        $controller = new UsersController($model);
+            
+        if ($method == 'POST') {
+            $data = $controller->login($requestJSON);
+        } 
+        break;    
+            
+
         default:
         throw new Exception("$method is not implemented on: $baseURL ", 501); // 501: Not Implemented!
         break;
