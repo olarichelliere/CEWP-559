@@ -46,15 +46,25 @@ class UsersController
                       
         $this->model->storeToken($user->id, $token);
         
-        return array('token' => $token, 'isAdmin'=> $user->isAdmin);    
+        return array('token' => $token, 'isAdmin'=> $user->isadmin);    
             
             
-            //$payload->password=password_hash($payload->password,PASSWORD_BCRYPT);
-        
-        
+        //$payload->password=password_hash($payload->password,PASSWORD_BCRYPT); 
         //return $this->model->create($payload);
     }
     public function verify($headers){
+       
+        $token=explode(' ',$headers['Authorization'])[1];
         
+        if($this->model->verifyToken($token)){
+            //increase expiration ??? 
+            return true;
+        };
+        return false;
+        
+    }
+
+    public function adminOnly(){
+
     }
 }

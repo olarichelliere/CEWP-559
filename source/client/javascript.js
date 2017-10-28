@@ -59,8 +59,6 @@ function showItems(event) {
     htmlContainer.innerHTML = '';
     htmlContainer.style.display = "inline-block";
 
-    
-
     httpRequest('GET', '/items', undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
@@ -75,7 +73,6 @@ function showItems(event) {
                 </div>`;
         }
     });
-
 }
 
 function showItem(event, id) {
@@ -85,8 +82,6 @@ function showItem(event, id) {
     
     var htmlContainer = document.getElementById('single_item_container');
     htmlContainer.style.display = "block";
-    
-    
     
     httpRequest('GET', '/items/' + id, undefined, function (data) {
         document.getElementById('single_item_name').innerHTML = data.name;

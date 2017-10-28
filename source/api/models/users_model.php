@@ -32,12 +32,13 @@ class UsersModel extends BaseModel
     
     public function storeToken($userId, $token){
         $generatedDateTime = date("Y-m-d H:i:s"); 
-        $expirationDateTime = date("Y-m-d H:i:s", strtotime('+2 hours'))
+        $expirationDateTime = date("Y-m-d H:i:s", strtotime('+2 hours'));
         
-        $query =  "INSERT INTO tokens SET userId=$userId, token='$token', lastUpdateDateTime=$generatedDateTime, expirationDateTime=$expirationDateTime";
-        
+        $query =  "INSERT INTO tokens SET userId='$userId', token='$token', 
+                    lastUpdateDateTime='$generatedDateTime', expirationDateTime='$expirationDateTime' ";
+     
         $result = $this->db_connection->query($query);
-        
+ /*   
         error_log("getUserByName");
         
         if (!$result) {
@@ -47,7 +48,20 @@ class UsersModel extends BaseModel
         if($result->num_rows !=1){
             throw new Exeption ('User does not exist', 400);
         }
-        
+        return $result->fetch_object($this->ModelName);
+*/        
+    }
+    public function verifyToken($token){
+
+        $query = "SELECT * FROM tokens WHERE token = '$token' and expirationDateTime > NOW() ";
+        $result = $this->db_connection->query($query);
+
+        if (!$result) {
+            throw new Exception("Unauthorized token: {$this->db_connection->error}", 401);
+        }
+
         return $result->fetch_object($this->ModelName);
     }
+
+
 }
