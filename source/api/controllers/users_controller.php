@@ -52,16 +52,21 @@ class UsersController
         //$payload->password=password_hash($payload->password,PASSWORD_BCRYPT); 
         //return $this->model->create($payload);
     }
+
     public function verify($headers){
-       
+        if (!array_key_exists('Authorization', $headers)) {
+            throw new Exception('`Authorization` should be provided!');
+        }
+        
         $token=explode(' ',$headers['Authorization'])[1];
         
-        if($this->model->verifyToken($token)){
-            //increase expiration ??? 
-            return true;
-        };
-        return false;
-        
+        return $this->model->verifyToken($token);
+    }
+
+    public function loggedInOnly($headers){
+        if(!$this->verify($headers)) {
+            throw new Exception("Only Authroized users can access this resource", 401);
+        }
     }
 
     public function adminOnly(){
