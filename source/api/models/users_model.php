@@ -52,7 +52,6 @@ class UsersModel extends BaseModel
 */        
     }
     public function verifyToken($token){
-
         $query = "SELECT * FROM tokens WHERE token = '$token' and expirationDateTime > NOW() ";
         $result = $this->db_connection->query($query);
 
@@ -60,7 +59,10 @@ class UsersModel extends BaseModel
             throw new Exception("Unauthorized token: {$this->db_connection->error}", 401);
         }
 
-        return $result->fetch_object($this->ModelName);
+        if ($result->num_rows != 1) {
+            return false;
+        }
+        return true;
     }
 
 
