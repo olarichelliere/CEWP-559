@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>E-Commerce - PHP / MySQL II</title>
+	<script src="cookies.js"></script>
 	<script src="javascript.js"></script>
 	<link rel="stylesheet" href="./style.css" type="text/css" />
 </head>
@@ -15,7 +16,11 @@
 				<li><a href="./">Home</a></li>
 				<li><a href="./items" id="items_btn">Items</a></li>
 				<li><a href="./items" id="new_item_btn">New Item</a></li>
+<<<<<<< HEAD
 				<li><a href="./items" id="new_category_btn">New Category</a></li>
+=======
+				<li><a href="./login" id="login_btn">Login</a></li>
+>>>>>>> origin/20171028
 			</ul>	
 		</div>
 		<div id="content">
@@ -36,6 +41,7 @@
 				<div class="separator"></div>
 				<button class="create" onclick="createItem(event)">Create</button>
 			</div>
+<<<<<<< HEAD
 			<div id="list_categories_container"></div>
 			<div id="single_category_container">
 				<div id="single_item_name"></div>
@@ -51,6 +57,14 @@
 				<div class="separator"></div>
 				<button class="create" onclick="createCategory(event)">Create</button>
 			</div>
+=======
+			<div id="login_container">
+				<div class="block"><label>username:</label><input type="text" id="username"/></div>
+				<div class="separator"></div>
+				<div class="block"><label>password:</label><input type="password" id="password"/></div>
+				<button class="create" onclick="login(event)">Login</button>
+			</div>			
+>>>>>>> origin/20171028
 		</div>
 		<div id="footer">
 		</div>

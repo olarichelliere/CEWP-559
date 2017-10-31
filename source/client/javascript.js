@@ -1,6 +1,9 @@
 
 var baseURL = 'http://localhost/api';
 
+var userToken = getCookie('token');
+var isAdmin = getCookie('isAdmin');
+
 function httpRequest(method, url, payload, callback) {
     var httpRequest = new XMLHttpRequest();
 
@@ -24,6 +27,7 @@ function httpRequest(method, url, payload, callback) {
 
     httpRequest.open(method, baseURL + url);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.setRequestHeader('Authorization', 'Bearer ' + userToken);
 
     if (payload) {
         payload = JSON.stringify(payload)
@@ -58,8 +62,6 @@ function showItems(event) {
     htmlContainer.innerHTML = '';
     htmlContainer.style.display = "inline-block";
 
-    
-
     httpRequest('GET', '/items', undefined, function (data) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
@@ -74,7 +76,6 @@ function showItems(event) {
                 </div>`;
         }
     });
-
 }
 
 function showItem(event, id) {
@@ -84,8 +85,6 @@ function showItem(event, id) {
     
     var htmlContainer = document.getElementById('single_item_container');
     htmlContainer.style.display = "block";
-    
-    
     
     httpRequest('GET', '/items/' + id, undefined, function (data) {
         document.getElementById('single_item_name').innerHTML = data.name;
@@ -131,7 +130,41 @@ function createItem(event){
             console.log('File uploaded successfully!');
             document.getElementById("items_btn").click();
         });
+    });
+}
 
+
+function showLogin(event) {
+    event.preventDefault();
+    
+    hideAllSections();
+
+    var htmlContainer = document.getElementById('login_container');
+    htmlContainer.style.display = "block";
+
+    document.getElementById("username").value = '';
+    document.getElementById("password").value = '';
+}
+
+function login(event) {
+    event.preventDefault();
+    
+    var username = document.getElementById("username").value;
+    var pass = document.getElementById("password").value;
+
+    var data = {
+        username: username,
+        password: pass
+    }
+
+    httpRequest('POST', '/login/', data, function (response) {
+        console.log('Successful log in: ', response);
+
+        userToken = response.token;
+        isAdmin = response.isAdmin;
+
+        setCookie('token', userToken, 1);
+        setCookie('isAdmin', isAdmin, 1);
     });
 }
 
@@ -239,10 +272,14 @@ function hideAllSections() {
     document.getElementById("list_items_container").style.display = "none";
     document.getElementById("single_item_container").style.display = "none";
     document.getElementById("new_item_container").style.display = "none";
+<<<<<<< HEAD
     document.getElementById("list_categories_container").style.display = "none";
     document.getElementById("single_category_container").style.display = "none";
     document.getElementById("new_category_container").style.display = "none";
  
+=======
+    document.getElementById("login_container").style.display = "none";
+>>>>>>> origin/20171028
 }
 
 
@@ -250,6 +287,12 @@ function loaded() {
     /// Button Listeners
     document.getElementById("items_btn").addEventListener('click', showItems, false);
     document.getElementById("new_item_btn").addEventListener('click', showNewItem, false);
+<<<<<<< HEAD
     document.getElementById("new_category_btn").addEventListener('click', showNewCategory, false);
     document.getElementById("items_btn").click();
+=======
+    document.getElementById("login_btn").addEventListener('click', showLogin, false);
+    
+    document.getElementById("login_btn").click();
+>>>>>>> origin/20171028
 }

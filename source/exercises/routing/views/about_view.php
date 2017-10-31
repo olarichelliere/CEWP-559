@@ -9,6 +9,9 @@ class AboutView
     }
 	
     public function output(){
-        return $this->model->title . ': '. $this->model->description;
+        
+        $title=$this->model->title;
+        $description=$this->model->description;
+        require_once __DIR__. '/../templates/template.php';
     }
 }

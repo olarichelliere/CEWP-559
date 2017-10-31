@@ -11,12 +11,12 @@ class ItemController
 
     public function getAll()
     {
-        $this->model->getAll();
+        return $this->model->getAll();
     }
 
     public function getOne($id)
     {
-        $this->model->getOne($id);
+        return $this->model->getOne($id);
     }
 
     public function create($payload)
@@ -30,7 +30,7 @@ class ItemController
             throw new Exception('`price` should be provided!');
         }
 
-        $this->model->create($payload);
+        return $this->model->create($payload);
     }
 
     public function upload($id, $file)
@@ -67,5 +67,22 @@ class ItemController
         $this->model->updateImage($id, $fileName);
 
         return $finalFile;
+    }
+
+    /**
+     * getAllWithFilters checks for the valid filters and passes them to the Model to retrieve the records based on the filters
+     * 
+     * categoryid should be an integer value. All the values from $_GET are string we need `intval` function to extract the integer value.
+     */
+    public function getAllWithFilters($filters) {
+
+        $categoryId = $filters['categoryid'];
+        $categoryId = intval($categoryId);
+
+        if ($categoryId == 0) {
+            throw new Exception('Invalid categoryid. ', 400);
+        }
+
+        return $this->model->getFilteredItems($categoryId);
     }
 }

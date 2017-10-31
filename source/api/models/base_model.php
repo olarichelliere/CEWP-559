@@ -25,7 +25,30 @@ class BaseModel
             $this->db_connection = $connection;
         }
     }
+   
     
+    /**
+     * getFiltered will retrieve all the records from the databse from $TableName based on the JOIN clause and WHERE Clause specified
+     */
+    public function getFiltered($join_clause = '', $where_clause = '')
+    {
+        $items = array();
+        $query = "SELECT * FROM {$this->TableName} {$join_clause} {$where_clause}";
+
+        error_log("QUERY: $query");
+        
+        $result = $this->db_connection->query($query);
+
+        if (!$result) {
+            throw new Exception("Database error: {$this->db_connection->error}", 500);
+        }
+        
+        while ($item = $result->fetch_object($this->ModelName)) {
+            $items[] = $item;
+        }
+
+        return $items;
+    }
     
     /**
      * getAll will retrieve all the records from the databse from $TableName
@@ -35,17 +58,16 @@ class BaseModel
         $items = array();
         $query = "SELECT * FROM {$this->TableName}";
         $result = $this->db_connection->query($query);
+
+        error_log("Generated Query is: $query");
         
         if (!$result) {
-            printf("Error: %s\n", $this->db_connection->error);
-            return;
+            throw new Exception("Database error: {$this->db_connection->error}", 500);
         }
         
         while ($item = $result->fetch_object($this->ModelName)) {
             $items[] = $item;
         }
-        
-        $this->_data = $items;
 
         return $items;
     }
@@ -61,13 +83,10 @@ class BaseModel
         $result = $this->db_connection->query($query);
         
         if (!$result) {
-            printf("Error: %s\n", $this->db_connection->error);
-            return;
+            throw new Exception("Database error: {$this->db_connection->error}", 500);            
         }
         
         $item = $result->fetch_object($this->ModelName);
-        $this->_data = $item;
-
         return $item;
     }
 
@@ -99,8 +118,7 @@ class BaseModel
         $result = $this->db_connection->query($query);
         
         if (!$result) {
-            printf("Error: %s\n", $this->db_connection->error);
-            return;
+            throw new Exception("Database error: {$this->db_connection->error}", 500);
         }
         
         $insertedId = $this->db_connection->insert_id;
@@ -117,8 +135,7 @@ class BaseModel
         $result = $this->db_connection->query($query);
         
         if (!$result) {
-            printf("Error: %s\n", $this->db_connection->error);
-            return;
+            throw new Exception("Database error: {$this->db_connection->error}", 500);
         }
 
         return;
