@@ -60,6 +60,24 @@ class UserModel extends BaseModel
 
         return true;
     }
+    
+     public function getUserByToken($token) 
+    {
+        $query = "SELECT * FROM users JOIN tokens ON users.id=tokens.userId WHERE token = '$token' ";
+        $result = $this->db_connection->query($query);
+
+        error_log("getUserByTokene SQL: $query");
+        
+        if (!$result) {
+            throw new Exception("Database error: {$this->db_connection->error}", 500);            
+        }
+
+        if ($result->num_rows != 1) {
+        	throw new Exception('Token does not exist', 400);
+        }
+        
+        return $result->fetch_object($this->ModelName);
+    }
 }
 
     

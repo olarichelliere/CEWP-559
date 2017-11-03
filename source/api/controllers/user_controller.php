@@ -71,5 +71,23 @@ User is an Object with the form of:
         if (!$isValidToken) {
             throw new Exception("Invalid / Expired Token", 401);
         }
+        
+        return $token;
     }
+    
+    public function isAdmin($headers){
+        $token = $this->verify($headers);
+        
+        
+        $user = $this->model->getUserByToken($token);
+        
+        if (!$user->isAdmin == "1"){
+            throw new Exception("Admin Only!",403);
+        }
+        
+        
+        
+    }
+    
+    
 }

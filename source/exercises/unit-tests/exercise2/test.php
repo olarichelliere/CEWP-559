@@ -19,6 +19,12 @@ final class CalculatorTest extends TestCase
         $this->assertFalse($e->isValid(), 'Email should only be lower case!');
     }
 
+    public function testDomaineExtension()
+    {
+        $e = new Email('INFO@example.comcomcom');
+        $this->assertFalse($e->isValid(), 'Email should only be 2 or 3 letters long!');
+    }
+    
     public function testMagicToString()
     {
         $e = new Email('info@example.com');
