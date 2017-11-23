@@ -4,7 +4,9 @@
 	<title>E-Commerce - PHP / MySQL II</title>
 	<script src="cookies.js"></script>
 	<script src="javascript.js"></script>
-	<link rel="stylesheet" href="./style.css" type="text/css" />
+	<script src="https://checkout.stripe.com/checkout.js"></script>
+    <link rel="stylesheet" href="./style.css" type="text/css" />
+    
 </head>
 <body onload="loaded()">
 	<div id="page">
@@ -42,10 +44,12 @@
 				<div class="separator"></div>
 				<div class="block"><label>password:</label><input type="password" id="password"/></div>
 				<button class="create" onclick="login(event)">Login</button>
-			</div>			
+			</div>
+            <button class="create" id="customButton">Purchase</button>
 		</div>
 		<div id="footer">
 		</div>
 	</div>
 </body>
 </html>
+<script src="stripe.js"></script>
